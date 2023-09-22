@@ -1,10 +1,15 @@
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import Tracker from './pages/Tracker';
 
 const App = () => (
-  <>
-    <h1 className="text-1xl font-bold underline bg-red-800">Turn Tracker</h1>
-    <p>RPG Turn Order made simple</p>
-  </>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/tracker" element={<Tracker />} />
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;
