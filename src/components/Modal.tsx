@@ -27,6 +27,7 @@ const Modal = ({ addToTracker, changeModalDisplay }: ModalProps) => {
       type: 'Character',
       name: nameRef.current.value,
       initiative: parseInt(initiativeRef.current.value),
+      current: false,
     });
 
     changeModalDisplay();

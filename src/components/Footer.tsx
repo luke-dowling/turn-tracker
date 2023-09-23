@@ -1,28 +1,33 @@
-import { useState } from 'react';
-
 type FooterProps = {
   orderTracker: () => void;
+  isPlaying: boolean;
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+  nextTurn: () => void;
+  previousTurn: () => void;
+  playPause: () => void;
 };
 
-const Footer = ({ orderTracker }: FooterProps) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const playPause = () => {
-    if (!isPlaying) {
-      orderTracker();
-    }
-    setIsPlaying((prev) => !prev);
-  };
-
+const Footer = ({
+  orderTracker,
+  isPlaying,
+  setIsPlaying,
+  nextTurn,
+  previousTurn,
+  playPause,
+}: FooterProps) => {
   return (
     <footer>
       {isPlaying ? (
         <>
-          <button type="button">Prev</button>
+          <button type="button" onClick={previousTurn}>
+            Prev
+          </button>
           <button type="button" onClick={playPause}>
             Stop
           </button>
-          <button type="button">Next</button>
+          <button type="button" onClick={nextTurn}>
+            Next
+          </button>
         </>
       ) : (
         <>
