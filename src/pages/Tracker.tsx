@@ -55,12 +55,12 @@ const Tracker = () => {
 
   const previousTurn = () => {
     if (currentRound === 0 && currentTurn === 0) return;
-    if (currentTurn === tracker.length - 1) {
-      tracker[tracker.length - 1].current = false;
-      tracker[0].current = true;
+    if (currentTurn === 0) {
+      tracker[0].current = false;
+      tracker[tracker.length - 1].current = true;
     } else {
       tracker[currentTurn].current = false;
-      tracker[currentTurn + 1].current = true;
+      tracker[currentTurn - 1].current = true;
     }
     if (currentTurn === 0) {
       setCurrentRound((prev) => --prev);
