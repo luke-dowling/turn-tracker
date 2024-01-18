@@ -1,5 +1,6 @@
 import { useRef, FormEvent, useState } from 'react';
 import { Initiative } from '../shared.types';
+import { Button } from './Buttons/Button';
 
 type ModalProps = {
   addToTracker: (obj: Initiative) => void;
@@ -55,10 +56,16 @@ const Modal = ({ addToTracker, changeModalDisplay }: ModalProps) => {
   };
 
   return (
-    <div>
-      <form onSubmit={submitHandler}>
-        <fieldset>
-          <label htmlFor="character">Character</label>
+    <form
+      onSubmit={submitHandler}
+      className="bg-slate-50 text-black p-3 text-center absolute bottom-0 right-2 left-2 rounded-t-md h-96"
+    >
+      <legend className="text-3xl font-semibold underline mb-4">Create</legend>
+      <fieldset className="my-1 flex justify-evenly mb-4">
+        <div>
+          <label className="px-2" htmlFor="character">
+            Character
+          </label>
           <input
             type="radio"
             name="type"
@@ -67,7 +74,11 @@ const Modal = ({ addToTracker, changeModalDisplay }: ModalProps) => {
             defaultChecked
             onChange={changeType}
           />
-          <label htmlFor="monster">Monster</label>
+        </div>
+        <div>
+          <label className="px-2" htmlFor="monster">
+            Monster
+          </label>
           <input
             type="radio"
             name="type"
@@ -75,19 +86,41 @@ const Modal = ({ addToTracker, changeModalDisplay }: ModalProps) => {
             value="Monster"
             onChange={changeType}
           />
-        </fieldset>
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" ref={nameRef} />
-        <label htmlFor="initiative">Initiative</label>
-        <input type="number" id="initiative" ref={initiativeRef} />
-        <label htmlFor="ac">AC</label>
-        <input type="number" id="ac" ref={acRef} />
-        <label htmlFor="hp">HP</label>
-        <input type="number" id="hp" ref={hpRef} />
+        </div>
+      </fieldset>
+      <fieldset className="my-1 flex justify-between">
+        <label className="px-2" htmlFor="name">
+          Name:
+        </label>
+        <input type="text" id="name" ref={nameRef} className="flex-1" />
+      </fieldset>
+      <fieldset className="my-1 flex justify-between">
+        <label className="px-2" htmlFor="initiative">
+          Initiative:
+        </label>
+        <input
+          type="number"
+          id="initiative"
+          ref={initiativeRef}
+          className="flex-1"
+        />
+      </fieldset>
+      <fieldset className="my-1 flex justify-between">
+        {' '}
+        <label className="px-2" htmlFor="ac">
+          AC
+        </label>
+        <input className="flex-1" type="number" id="ac" ref={acRef} />
+      </fieldset>
+      <fieldset className="my-1 flex justify-between mb-5">
+        <label className="px-2" htmlFor="hp">
+          HP
+        </label>
+        <input className="flex-1" type="number" id="hp" ref={hpRef} />
+      </fieldset>
 
-        <button>Submit</button>
-      </form>
-    </div>
+      <Button>Submit</Button>
+    </form>
   );
 };
 

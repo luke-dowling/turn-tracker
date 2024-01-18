@@ -1,16 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
 import { Initiative } from '../shared.types';
 import Footer from '../components/Footer';
 import InitiativeItem from '../components/InitiativeItem';
+import { AddButton } from '../components/Buttons/Button';
+import { Layout } from '../components/Layout/Layout';
 
 const Tracker = () => {
   const [showModal, setShowModal] = useState(false);
   const [tracker, setTracker] = useState<Initiative[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTurn, setCurrentTurn] = useState(0);
-  const [currentRound, setCurrentRound] = useState(0);
+  const [currentRound, setCurrentRound] = useState(1);
+  const activeRef = useRef<HTMLDivElement | null>(null);
 
   const changeModalDisplay = () => {
     setShowModal((prev) => !prev);
@@ -37,6 +40,7 @@ const Tracker = () => {
         tracker[currentTurn].current = false;
         tracker[currentTurn + 1].current = true;
       }
+
       return [...tracker];
     });
 
@@ -54,7 +58,7 @@ const Tracker = () => {
   };
 
   const previousTurn = () => {
-    if (currentRound === 0 && currentTurn === 0) return;
+    if (currentRound === 1 && currentTurn === 0) return;
     if (currentTurn === 0) {
       tracker[0].current = false;
       tracker[tracker.length - 1].current = true;
@@ -85,7 +89,7 @@ const Tracker = () => {
       orderTracker();
     } else {
       tracker[currentTurn].current = false;
-      setCurrentRound(0);
+      setCurrentRound(1);
       setCurrentTurn(0);
     }
 
@@ -94,48 +98,55 @@ const Tracker = () => {
 
   return (
     <>
-      <Header />
-      <button type="button" onClick={changeModalDisplay}>
-        Add
-      </button>
+      <Layout>
+        <AddButton changeModal={changeModalDisplay}>+</AddButton>
+        {/* todo: here the character and monsters should be displayed when added */}
 
-      {/* todo: here the character and monsters should be displayed when added */}
-      {isPlaying ? <h4>Round: {currentRound}</h4> : null}
-      {tracker.length > 0 ? (
-        <>
-          {tracker.map((item) => {
-            return (
-              <InitiativeItem
-                name={item.name}
-                current={item.current}
-                initiative={item.initiative}
-                ac={item.ac}
-                hp={item.hp}
-                key={item.name}
-                type={item.type}
-                isPlaying={isPlaying}
-              />
-            );
-          })}
-        </>
-      ) : null}
+        {isPlaying ? (
+          <h4 className="text-center mt-3 text-1xl font-semibold">
+            Round: {currentRound}
+          </h4>
+        ) : null}
+        <div className="mt-4 flex-1 px-5 mb-20 overflow-scroll">
+          {tracker.length > 0 ? (
+            <>
+              {tracker.map((item) => {
+                return (
+                  <InitiativeItem
+                    name={item.name}
+                    current={item.current}
+                    initiative={item.initiative}
+                    ac={item.ac}
+                    hp={item.hp}
+                    key={item.name}
+                    type={item.type}
+                    isPlaying={isPlaying}
+                    activeRef={activeRef}
+                    currentTurn={currentTurn}
+                  />
+                );
+              })}
+            </>
+          ) : null}
+        </div>
 
-      {/* todo: add a modal to the page so when the user adds they input some information then the character/monster is added */}
-      {showModal ? (
-        <Modal
-          addToTracker={addToTracker}
-          changeModalDisplay={changeModalDisplay}
+        {/* todo: add a modal to the page so when the user adds they input some information then the character/monster is added */}
+        {showModal ? (
+          <Modal
+            addToTracker={addToTracker}
+            changeModalDisplay={changeModalDisplay}
+          />
+        ) : null}
+
+        <Footer
+          orderTracker={orderTracker}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          nextTurn={nextTurn}
+          previousTurn={previousTurn}
+          playPause={playPause}
         />
-      ) : null}
-
-      <Footer
-        orderTracker={orderTracker}
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        nextTurn={nextTurn}
-        previousTurn={previousTurn}
-        playPause={playPause}
-      />
+      </Layout>
     </>
   );
 };

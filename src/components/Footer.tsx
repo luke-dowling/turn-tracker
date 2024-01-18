@@ -16,22 +16,38 @@ const Footer = ({
   playPause,
 }: FooterProps) => {
   return (
-    <footer>
+    <footer className="bg-white py-2 flex justify-center absolute bottom-0 left-0 right-0">
       {isPlaying ? (
         <>
-          <button type="button" onClick={previousTurn}>
+          <button
+            className="rounded-full bg-black p-4"
+            type="button"
+            onClick={previousTurn}
+          >
             Prev
           </button>
-          <button type="button" onClick={playPause}>
+          <button
+            className="rounded-full bg-black relative bottom-8 p-4 mx-4"
+            type="button"
+            onClick={playPause}
+          >
             Stop
           </button>
-          <button type="button" onClick={nextTurn}>
+          <button
+            className="rounded-full bg-black p-4"
+            type="button"
+            onClick={nextTurn}
+          >
             Next
           </button>
         </>
       ) : (
         <>
-          <button type="button" onClick={playPause}>
+          <button
+            className="rounded-full bg-black relative bottom-8 p-4"
+            type="button"
+            onClick={playPause}
+          >
             Play
           </button>
         </>
