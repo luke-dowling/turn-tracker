@@ -1,16 +1,12 @@
 type FooterProps = {
-  orderTracker: () => void;
   isPlaying: boolean;
-  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   nextTurn: () => void;
   previousTurn: () => void;
   playPause: () => void;
 };
 
 const Footer = ({
-  orderTracker,
   isPlaying,
-  setIsPlaying,
   nextTurn,
   previousTurn,
   playPause,

@@ -3,11 +3,11 @@ import { Initiative } from '../shared.types';
 import { Button } from './Buttons/Button';
 
 type ModalProps = {
-  addToTracker: (obj: Initiative) => void;
+  addEntity: (obj: Initiative) => void;
   changeModalDisplay: () => void;
 };
 
-const Modal = ({ addToTracker, changeModalDisplay }: ModalProps) => {
+const Modal = ({ addEntity, changeModalDisplay }: ModalProps) => {
   const [type, setType] = useState<'Character' | 'Monster'>('Character');
   const nameRef = useRef<HTMLInputElement>(null);
   const initiativeRef = useRef<HTMLInputElement>(null);
@@ -50,7 +50,7 @@ const Modal = ({ addToTracker, changeModalDisplay }: ModalProps) => {
       initiativeItem['hp'] = parseInt(hpRef.current.value);
     }
 
-    addToTracker(initiativeItem);
+    addEntity(initiativeItem);
 
     changeModalDisplay();
   };
@@ -106,7 +106,6 @@ const Modal = ({ addToTracker, changeModalDisplay }: ModalProps) => {
         />
       </fieldset>
       <fieldset className="my-1 flex justify-between">
-        {' '}
         <label className="px-2" htmlFor="ac">
           AC
         </label>
