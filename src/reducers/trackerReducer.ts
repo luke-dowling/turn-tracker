@@ -74,6 +74,15 @@ export const trackerReducer: Reducer<ReducerState, GameReducer> = (
       } else {
         return state;
       }
+    case 'RESET':
+      return {
+        ...state,
+        turn: 0,
+        round: 1,
+        isPlaying: false,
+        dndEntities: [],
+      };
+
     default:
       throw new Error(`No action: ${action}`);
   }

@@ -20,7 +20,8 @@ export type GameAction =
   | 'NEXT_ROUND'
   | 'PREVIOUS_TURN'
   | 'PREVIOUS_ROUND'
-  | 'PLAY_PAUSE';
+  | 'PLAY_PAUSE'
+  | 'RESET';
 
 export type GameReducer = {
   type: GameAction;

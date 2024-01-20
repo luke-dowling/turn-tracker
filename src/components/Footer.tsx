@@ -1,16 +1,10 @@
-type FooterProps = {
-  isPlaying: boolean;
-  nextTurn: () => void;
-  previousTurn: () => void;
-  playPause: () => void;
-};
+import { useGameContext } from '../hooks/useGameContext';
+import { useGameLogic } from '../hooks/useGamelogic';
 
-const Footer = ({
-  isPlaying,
-  nextTurn,
-  previousTurn,
-  playPause,
-}: FooterProps) => {
+const Footer = () => {
+  const { reset, previousTurn, playPause, nextTurn } = useGameLogic();
+  const { isPlaying } = useGameContext();
+
   return (
     <footer className="bg-white py-2 flex justify-center absolute bottom-0 left-0 right-0">
       {isPlaying ? (
@@ -23,7 +17,7 @@ const Footer = ({
             Prev
           </button>
           <button
-            className="rounded-full bg-black relative bottom-8 p-4 mx-4"
+            className="rounded-full bg-black relative p-4 mx-4"
             type="button"
             onClick={playPause}
           >
@@ -40,11 +34,18 @@ const Footer = ({
       ) : (
         <>
           <button
-            className="rounded-full bg-black relative bottom-8 p-4"
+            className="rounded-full bg-black relative p-4 mx-2"
             type="button"
             onClick={playPause}
           >
             Play
+          </button>
+          <button
+            className="rounded-full bg-black relative p-4 mx-2"
+            type="button"
+            onClick={reset}
+          >
+            Reset
           </button>
         </>
       )}

@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Initiative } from '../shared.types';
 
 interface ItemProps extends Initiative {
   isPlaying: boolean;
-  activeRef: React.MutableRefObject<HTMLDivElement | null>;
   currentTurn: number;
 }
 
@@ -15,19 +14,20 @@ const InitiativeItem = ({
   ac,
   hp,
   isPlaying,
-  activeRef,
   currentTurn,
 }: ItemProps) => {
+  const activeRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     activeRef.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
   }, [currentTurn]);
+
   if (isPlaying && current) {
     return (
       <div
-        className="bg-red-500  mb-4 py-2 px-4 flex justify-between items-center rounded-s-md"
+        className="bg-red-500 mb-4 py-2 px-4 flex justify-between items-center rounded-s-md"
         ref={activeRef}
       >
         <h3 className="font-bold">Current: {current}</h3>

@@ -7,7 +7,7 @@ const Homepage = () => {
     <>
       <Header />
       <main className="flex flex-col items-center justify-around h-96 text-center px-4">
-        <h1 className="text-4xl font-bold">Welcome to Turn Tracker</h1>
+        <h1 className="text-4xl font-bold">Welcome Game Master</h1>
         <p className="font-semibold">
           This app will allow you to easily maintain your characters and
           monsters turns in an RPG (Role Playing Game) setting.

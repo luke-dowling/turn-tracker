@@ -119,6 +119,10 @@ export const useGameLogic = () => {
     }
   };
 
+  const reset = () => {
+    dispatchGameAction({ type: 'RESET' });
+  };
+
   //   const playPause = () => {
   //     if (tracker.length < 2) {
   //       alert('please add two items before starting initiative');
@@ -136,5 +140,5 @@ export const useGameLogic = () => {
   //     setIsPlaying((prev) => !prev);
   //   };
 
-  return { addEntity, nextTurn, previousTurn, playPause };
+  return { addEntity, nextTurn, previousTurn, playPause, reset };
 };
